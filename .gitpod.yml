@@ -3,9 +3,13 @@ image:
 
 tasks:
   - init: |
-      echo "Setting up PostgreSQL..."
-      export PGPASSWORD=mysecretpassword
-      psql -h localhost -U gitpod -d postgres -c "CREATE DATABASE mydatabase;"
+      echo "Installing PostgreSQL..."
+      sudo apt-get update
+      sudo apt-get install -y postgresql postgresql-contrib
+      sudo service postgresql start
+      echo "Creating database..."
+      sudo -u postgres psql -c "CREATE USER gitpod WITH PASSWORD 'yahia';"
+      sudo -u postgres psql -c "CREATE DATABASE mydatabase OWNER gitpod;"
       echo "PostgreSQL setup complete."
     command: |
       echo "Starting application..."
@@ -15,17 +19,9 @@ ports:
   - port: 5432
     onOpen: ignore
 
-github:
-  prebuilds:
-    master: true
-    branches: true
-    pullRequests: true
-    addCheck: true
-    addComment: true
-    addBadge: true
-
-vscode:
-  extensions:
-    - ms-python.python
-    - ms-azuretools.vscode-docker
-    - bradlc.vscode-tailwindcss
+env:
+  DATABASE_HOST: localhost
+  DATABASE_PORT: 5432
+  DATABASE_USER: gitpod
+  DATABASE_PASSWORD: mysecretpassword
+  DATABASE_NAME: mydatabase
