@@ -8,7 +8,7 @@ tasks:
       sudo apt-get install -y postgresql postgresql-contrib
       sudo service postgresql start
       echo "Creating database..."
-      sudo -u postgres psql -c "CREATE USER gitpod WITH PASSWORD 'yahia';"
+      sudo -u postgres psql -c "CREATE USER gitpod WITH PASSWORD '214365';"
       sudo -u postgres psql -c "CREATE DATABASE mydatabase OWNER gitpod;"
       echo "PostgreSQL setup complete."
     command: |
@@ -23,5 +23,5 @@ env:
   DATABASE_HOST: localhost
   DATABASE_PORT: 5432
   DATABASE_USER: gitpod
-  DATABASE_PASSWORD: mysecretpassword
+  DATABASE_PASSWORD: 214365
   DATABASE_NAME: mydatabase
