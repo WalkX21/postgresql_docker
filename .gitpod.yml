@@ -1,0 +1,22 @@
+image:
+  file: .gitpod.Dockerfile
+
+ports:
+  - port: 5050
+    onOpen: open-preview
+
+tasks:
+  - name: Start pgAdmin
+    init: |
+      echo "Starting pgAdmin setup..."
+      mkdir -p ~/.pgadmin
+      export PGADMIN_DEFAULT_EMAIL=admin@example.com
+      export PGADMIN_DEFAULT_PASSWORD=admin
+      python3 /usr/local/lib/python3.8/dist-packages/pgadmin4/pgAdmin4.py &
+    command: |
+      echo "pgAdmin is running on port 5050. Use the preview option to access it."
+
+vscode:
+  extensions:
+    - ms-python.python
+    - mtxr.sqltools
