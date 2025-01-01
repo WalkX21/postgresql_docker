@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean
 
 # Installer pgAdmin
+RUN pip install --upgrade pip
 RUN pip install flask && pip install pgadmin4
 
 # Configurer pgAdmin pour qu'il puisse être exécuté
