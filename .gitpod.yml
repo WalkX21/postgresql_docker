@@ -6,9 +6,10 @@ ports:
     onOpen: open-preview
 
 tasks:
-  - name: Start pgAdmin
+  - name: Install Git and Start pgAdmin
     init: |
       echo "Starting pgAdmin setup..."
+      sudo apt-get update && sudo apt-get install -y git
       mkdir -p ~/.pgadmin
       export PGADMIN_DEFAULT_EMAIL=admin@example.com
       export PGADMIN_DEFAULT_PASSWORD=admin
