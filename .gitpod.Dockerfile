@@ -1,6 +1,6 @@
-# Utiliser une image de base avec Python et les dépendances nécessaires
-FROM python:3.8-slim
+FROM gitpod/workspace-full
 
+<<<<<<< HEAD
 # Installer les dépendances nécessaires pour pgAdmin
 RUN apt-get update && apt-get install -y \
     git \   
@@ -28,3 +28,10 @@ EXPOSE 5050
 
 # Commande par défaut pour démarrer pgAdmin
 CMD ["python3", "/usr/local/lib/python3.8/dist-packages/pgadmin4/pgAdmin4.py"]
+=======
+# Install PostgreSQL client
+RUN sudo apt-get update && \
+    sudo apt-get install -y postgresql-client && \
+    sudo apt-get clean && \
+    sudo rm -rf /var/lib/apt/lists/* /tmp/*
+>>>>>>> 053b307 (git)

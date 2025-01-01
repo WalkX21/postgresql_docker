@@ -1,23 +1,31 @@
 image:
   file: .gitpod.Dockerfile
 
-ports:
-  - port: 5050
-    onOpen: open-preview
-
 tasks:
-  - name: Install Git and Start pgAdmin
-    init: |
-      echo "Starting pgAdmin setup..."
-      sudo apt-get update && sudo apt-get install -y git
-      mkdir -p ~/.pgadmin
-      export PGADMIN_DEFAULT_EMAIL=admin@example.com
-      export PGADMIN_DEFAULT_PASSWORD=admin
-      python3 /usr/local/lib/python3.8/dist-packages/pgadmin4/pgAdmin4.py &
+  - init: |
+      echo "Setting up PostgreSQL..."
+      export PGPASSWORD=mysecretpassword
+      psql -h localhost -U gitpod -d postgres -c "CREATE DATABASE mydatabase;"
+      echo "PostgreSQL setup complete."
     command: |
-      echo "pgAdmin is running on port 5050. Use the preview option to access it."
+      echo "Starting application..."
+      # Start your application here, e.g., `npm start` or `python app.py`
+
+ports:
+  - port: 5432
+    onOpen: ignore
+
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    addCheck: true
+    addComment: true
+    addBadge: true
 
 vscode:
   extensions:
     - ms-python.python
-    - mtxr.sqltools
+    - ms-azuretools.vscode-docker
+    - bradlc.vscode-tailwindcss
