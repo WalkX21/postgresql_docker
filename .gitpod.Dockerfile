@@ -3,6 +3,7 @@ FROM python:3.8-slim
 
 # Installer les dépendances nécessaires pour pgAdmin
 RUN apt-get update && apt-get install -y \
+    git \   
     wget \
     libpq-dev \
     python3-dev \
