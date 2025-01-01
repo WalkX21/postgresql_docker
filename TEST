@@ -1,0 +1,36 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - init: |
+      echo "Setting password for gitpod user..."
+      echo "gitpod:214365" | sudo chpasswd
+      echo "Installing PostgreSQL..."
+      sudo apt-get update
+      sudo apt-get install -y postgresql postgresql-contrib
+      sudo service postgresql start
+      echo "Creating database..."
+      sudo -u postgres psql -c "CREATE USER gitpod WITH PASSWORD '214365';"
+      sudo -u postgres psql -c "CREATE DATABASE mydatabase OWNER gitpod;"
+      echo "PostgreSQL setup complete."
+      echo "Installing pgAdmin..."
+      pip install --upgrade pip
+      pip install pgadmin4
+      echo "pgAdmin installed."
+    command: |
+      echo "Starting application..."
+      # Start your application here, e.g., `npm start` or `python app.py`
+      pgadmin4
+
+ports:
+  - port: 5432
+    onOpen: ignore
+  - port: 5050
+    onOpen: open-browser
+
+env:
+  DATABASE_HOST: localhost
+  DATABASE_PORT: 5432
+  DATABASE_USER: gitpod
+  DATABASE_PASSWORD: 214365
+  DATABASE_NAME: mydatabase

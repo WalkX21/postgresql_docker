@@ -3,14 +3,11 @@ image:
 
 tasks:
   - init: |
-      echo "Installing PostgreSQL..."
-      sudo apt-get update
-      sudo apt-get install -y postgresql postgresql-contrib
-      sudo service postgresql start
-      echo "Creating database..."
-      sudo -u postgres psql -c "CREATE USER gitpod WITH PASSWORD '214365';"
-      sudo -u postgres psql -c "CREATE DATABASE mydatabase OWNER gitpod;"
-      echo "PostgreSQL setup complete."
+      echo "Starting PostgreSQL with Docker..."
+      docker run -d --name postgres -e POSTGRES_USER=gitpod -e POSTGRES_PASSWORD=mysecretpassword -e POSTGRES_DB=mydatabase -p 5432:5432 postgres
+      echo "Starting pgAdmin with Docker..."
+      docker run -d --name pgadmin -e PGADMIN_DEFAULT_EMAIL=user@example.com -e PGADMIN_DEFAULT_PASSWORD=secret -p 5050:80 dpage/pgadmin4
+      echo "PostgreSQL and pgAdmin setup complete."
     command: |
       echo "Starting application..."
       # Start your application here, e.g., `npm start` or `python app.py`
@@ -18,10 +15,20 @@ tasks:
 ports:
   - port: 5432
     onOpen: ignore
+  - port: 5050
+    onOpen: open-browser
 
-env:
-  DATABASE_HOST: localhost
-  DATABASE_PORT: 5432
-  DATABASE_USER: gitpod
-  DATABASE_PASSWORD: 214365
-  DATABASE_NAME: mydatabase
+vscode:
+  extensions:
+    - ms-python.python
+    - ms-azuretools.vscode-docker
+    - bradlc.vscode-tailwindcss
+
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    addCheck: true
+    addComment: true
+    addBadge: true
