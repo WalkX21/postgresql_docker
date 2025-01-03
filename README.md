@@ -1,5 +1,7 @@
 # postgresql_docker
 
+psql -h postgres -U gitpod -d mydatabase
+
 sudo mkdir -p /etc/cni/net.d
 sudo bash -c 'cat > /etc/cni/net.d/10-mynet.conf <<EOF
 {
