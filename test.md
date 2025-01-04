@@ -3,8 +3,6 @@ image:
 
 tasks:
   - init: |
-      echo "Adding 'postgres' to /etc/hosts..."
-      echo "127.0.0.1 postgres" | sudo tee -a /etc/hosts
       echo "Starting PostgreSQL with Docker..."
       docker run -d --name postgres -e POSTGRES_USER=gitpod -e POSTGRES_PASSWORD=mysecretpassword -e POSTGRES_DB=mydatabase -p 5432:5432 postgres
       echo "Starting pgAdmin with Docker..."
@@ -20,9 +18,17 @@ ports:
   - port: 5050
     onOpen: open-browser
 
-env:
-  DATABASE_HOST: postgres
-  DATABASE_PORT: 5432
-  DATABASE_USER: gitpod
-  DATABASE_PASSWORD: mysecretpassword
-  DATABASE_NAME: mydatabase
+vscode:
+  extensions:
+    - ms-python.python
+    - ms-azuretools.vscode-docker
+    - bradlc.vscode-tailwindcss
+
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    addCheck: true
+    addComment: true
+    addBadge: true
