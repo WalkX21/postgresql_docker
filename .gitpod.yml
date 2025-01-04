@@ -3,8 +3,6 @@ image:
 
 tasks:
   - init: |
-      echo "Adding 'postgres' to /etc/hosts..."
-      echo "127.0.0.1 postgres" | sudo tee -a /etc/hosts
       echo "Starting PostgreSQL with Docker..."
       docker run -d --name postgres -e POSTGRES_USER=gitpod -e POSTGRES_PASSWORD=mysecretpassword -e POSTGRES_DB=mydatabase -p 5432:5432 postgres
       echo "Starting pgAdmin with Docker..."
@@ -13,6 +11,9 @@ tasks:
     command: |
       echo "Starting application..."
       # Start your application here, e.g., `npm start` or `python app.py`
+      echo "Extracting PostgreSQL container IP address..."
+      POSTGRES_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgres)
+      echo "PostgreSQL container IP address: $POSTGRES_IP"
 
 ports:
   - port: 5432
