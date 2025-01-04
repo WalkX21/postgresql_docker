@@ -18,6 +18,13 @@ ports:
   - port: 5050
     onOpen: open-browser
 
+env:
+  DATABASE_HOST: postgres
+  DATABASE_PORT: 5432
+  DATABASE_USER: gitpod
+  DATABASE_PASSWORD: mysecretpassword
+  DATABASE_NAME: mydatabase
+
 vscode:
   extensions:
     - ms-python.python
