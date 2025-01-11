@@ -34,3 +34,11 @@ env:
   DATABASE_USER: gitpod
   DATABASE_PASSWORD: 214365
   DATABASE_NAME: mydatabase
+
+
+
+  ----------------
+
+  # pip install faker\
+    # python generate_employes.py \
+    # python generate.py\

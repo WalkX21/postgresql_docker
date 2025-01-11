@@ -6,6 +6,7 @@ sudo nano /etc/hosts
 psql -h postgres -U gitpod -d mydatabase
 
 docker cp /workspace/postgresql_docker/persons.csv postgres:/tmp/persons.csv
+docker cp /workspace/postgresql_docker/employes.csv postgres:/tmp/employes.csv
 
 
 sudo mkdir -p /etc/cni/net.d

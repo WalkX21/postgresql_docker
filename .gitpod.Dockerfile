@@ -4,4 +4,6 @@ FROM gitpod/workspace-full
 RUN sudo apt-get update && \
     sudo apt-get install -y postgresql-client && \
     sudo apt-get clean && \
-    sudo rm -rf /var/lib/apt/lists/* /tmp/*
+    sudo rm -rf /var/lib/apt/lists/* /tmp/* \
+    
+    

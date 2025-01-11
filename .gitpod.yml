@@ -14,6 +14,8 @@ tasks:
       echo "Extracting PostgreSQL container IP address..."
       POSTGRES_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgres)
       echo "PostgreSQL container IP address: $POSTGRES_IP"
+      docker cp /workspace/postgresql_docker/employes.csv postgres:/tmp/employes.csv\
+      docker cp /workspace/postgresql_docker/persons.csv postgres:/tmp/persons.csv
 
 ports:
   - port: 5432
